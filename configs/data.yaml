@@ -1,0 +1,48 @@
+# Dataset configuration for COCO 2017 subset training.
+#
+# Two supported modes (see `mode` below):
+#   - "demo": tiny, fast, Colab-friendly subset for smoke-testing the pipeline.
+#   - "full_subset": larger curated subset of COCO classes/images for real training.
+
+dataset:
+  name: "coco2017"
+  mode: "demo" # "demo" | "full_subset"
+  base_url: "http://images.cocodataset.org"
+  annotations_url: "http://images.cocodataset.org/annotations/annotations_trainval2017.zip"
+  train_images_url: "http://images.cocodataset.org/zips/train2017.zip"
+  val_images_url: "http://images.cocodataset.org/zips/val2017.zip"
+
+  # Curated class subset (COCO category names). Only these classes are kept
+  # when building the compact training set.
+  classes:
+    - person
+    - car
+    - bicycle
+    - bus
+    - truck
+    - motorcycle
+    - traffic light
+
+  modes:
+    demo:
+      images_per_class: 40 # small sample per class for a fast Colab smoke run
+      max_total_images: 200
+      val_fraction: 0.15
+      img_size: 416
+    full_subset:
+      images_per_class: 1500
+      max_total_images: 8000
+      val_fraction: 0.1
+      img_size: 640
+
+  splits_dir: "data/splits"
+  processed_dir: "data/processed"
+  raw_dir: "data/raw"
+
+  # YOLO-format export (ultralytics expects a data.yaml with train/val paths + names)
+  yolo_export:
+    output_dir: "data/processed/yolo"
+    train_subdir: "images/train"
+    val_subdir: "images/val"
+    labels_train_subdir: "labels/train"
+    labels_val_subdir: "labels/val"
