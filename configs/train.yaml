@@ -1,0 +1,38 @@
+# Training configuration for the YOLO-style detector (ultralytics backend).
+
+train:
+  base_model: "yolov8n.pt" # lightweight pretrained checkpoint, Colab-friendly
+  epochs: 30
+  batch_size: 16
+  img_size: 416 # overridden by data.yaml mode when running scripts/train.py
+  patience: 10 # early stopping patience
+  optimizer: "auto" # auto | SGD | Adam | AdamW
+  lr0: 0.01
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3
+  workers: 4
+  seed: 42
+  device: "auto"
+  amp: true
+  project_dir: "artifacts/exported_models"
+  run_name: "detector_run"
+  resume: false
+  pretrained: true
+
+  augment:
+    hsv_h: 0.015
+    hsv_s: 0.7
+    hsv_v: 0.4
+    fliplr: 0.5
+    flipud: 0.0
+    mosaic: 1.0
+    mixup: 0.0
+    degrees: 0.0
+    translate: 0.1
+    scale: 0.5
+
+  checkpoint:
+    save_period: 5
+    export_best_to: "artifacts/exported_models/best.pt"
