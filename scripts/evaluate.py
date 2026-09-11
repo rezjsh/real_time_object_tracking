@@ -18,6 +18,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from object_tracking_app.config.settings import get_settings  # noqa: E402
 from object_tracking_app.evaluation.benchmark import run_benchmark  # noqa: E402
 from object_tracking_app.utils.logger import get_logger  # noqa: E402
+from object_tracking_app.utils.io import ensure_dir  # noqa: E402
+
 
 logger = get_logger(__name__)
 
@@ -39,6 +41,8 @@ def main() -> None:
     labels_dir = args.labels_dir or str(output_root / export_cfg.labels_val_subdir)
 
     report_path = settings.resolve(settings.project_info.paths.metrics_dir) / "evaluation_report.json"
+    ensure_dir(report_path.parent)
+
 
     report = run_benchmark(
         images_dir=images_dir,
