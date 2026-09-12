@@ -1,0 +1,30 @@
+# Inference and tracking runtime configuration.
+
+inference:
+  weights_path: "artifacts/exported_models/best.pt"
+  fallback_weights: "yolov8n.pt" # used if a fine-tuned checkpoint isn't found yet
+  device: "auto"
+  img_size: 640
+  conf_threshold: 0.35
+  iou_threshold: 0.45
+  max_detections: 100
+  classes: null # null = all classes; else list of class names to keep
+
+tracker:
+  type: "sort" # lightweight SORT/ByteTrack-style IOU + Kalman tracker
+  max_age: 30 # frames to keep a lost track alive
+  min_hits: 3 # detections required before a track is confirmed
+  iou_threshold: 0.3 # association IOU gate
+  high_conf_threshold: 0.5 # ByteTrack-style two-stage association split
+  low_conf_threshold: 0.1
+
+video:
+  output_fps: null # null = keep source FPS
+  codec: "mp4v"
+  draw_trails: true
+  trail_length: 30
+
+stream:
+  source: 0 # webcam index or RTSP/HTTP URL
+  frame_skip: 0 # process every (frame_skip+1)-th frame
+  display: true
