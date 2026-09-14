@@ -1,0 +1,27 @@
+# Top-level project configuration.
+# Referenced by src/object_tracking_app/config/settings.py
+
+project:
+  name: "object-tracking-app"
+  seed: 42
+  device: "auto"          # auto | cpu | cuda | mps
+  artifacts_dir: "artifacts"
+  data_dir: "data"
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  external_dir: "data/external"
+  splits_dir: "data/splits"
+  samples_dir: "data/samples"
+  metrics_dir: "artifacts/metrics"
+  plots_dir: "artifacts/plots"
+  sample_outputs_dir: "artifacts/sample_outputs"
+  exported_models_dir: "artifacts/exported_models"
+
+configs:
+  data: "configs/data.yaml"
+  train: "configs/train.yaml"
+  inference: "configs/inference.yaml"
+  deploy: "configs/deploy.yaml"
+  logging: "configs/logging.yaml"
