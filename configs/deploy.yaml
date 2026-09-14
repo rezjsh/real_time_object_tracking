@@ -1,0 +1,24 @@
+# Deployment configuration for the Streamlit UI and the optional FastAPI service.
+
+streamlit:
+  title: "Real-Time Multi-Object Detection & Tracking"
+  layout: "wide"
+  default_conf_threshold: 0.35
+  default_iou_threshold: 0.45
+  max_upload_size_mb: 200
+  allowed_image_types: ["jpg", "jpeg", "png", "bmp"]
+  allowed_video_types: ["mp4", "avi", "mov", "mkv"]
+  save_outputs_dir: "artifacts/sample_outputs"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  title: "Object Tracking Inference API"
+  version: "0.1.0"
+  max_upload_size_mb: 200
+  cors_allow_origins: ["*"]
+
+runtime:
+  weights_path: "artifacts/exported_models/best.pt"
+  fallback_weights: "yolov8n.pt"
+  device: "auto"
